@@ -1,14 +1,14 @@
 <template>
-    <ContentField>
-        home
-    </ContentField>
+    <CarouselField>
+
+    </CarouselField>
 </template>
 
 <script >
-import ContentField from '@/components/ContentField.vue'
+import CarouselField from '@/components/CarouselField.vue'
 export default {
     components: {
-        ContentField,
+        CarouselField,
     }
 }
 </script>
