@@ -4,9 +4,8 @@
     </ContentField>
 </template>
 
-<script>
+<script >
 import ContentField from '@/components/ContentField.vue'
-
 export default {
     components: {
         ContentField,
