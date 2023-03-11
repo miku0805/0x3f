@@ -1,5 +1,3 @@
-//配置跨域问题
-
 package com.oj.backend.config;
 
 import org.springframework.context.annotation.Configuration;
