@@ -1,19 +1,12 @@
 <template>
-    <ContentField>
-        discussion
-    </ContentField>
-    <!-- <HelloWorld>
-
-    </HelloWorld> -->
+    <MdEditor></MdEditor>
 </template>
 
 <script>
-import ContentField from '@/components/ContentField.vue'
-// import HelloWorld from '@/components/HelloWorld.vue';
+import MdEditor from "@/components/MdEditor.vue"
 export default {
     components: {
-        ContentField,
-        // HelloWorld,
+        MdEditor,
     }
 }
 </script>

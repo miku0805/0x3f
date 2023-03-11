@@ -2,6 +2,7 @@
     <CarouselField>
 
     </CarouselField>
+    <vuejs-heatmap></vuejs-heatmap>
 </template>
 
 <script >

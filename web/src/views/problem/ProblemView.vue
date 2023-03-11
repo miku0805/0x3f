@@ -1,15 +1,14 @@
 <template>
-    <ContentField>
-        problem
-    </ContentField>
+    <AceEditor></AceEditor>
 </template>
 
-<script>
-import ContentField from '@/components/ContentField.vue'
+<script >
+import AceEditor from "@/components/AceEditor.vue"
 
 export default {
     components: {
-        ContentField,
+        AceEditor,
+
     }
 }
 </script>

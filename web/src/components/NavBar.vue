@@ -9,7 +9,7 @@
         <el-menu-item index="/contest/">Contest</el-menu-item>
         <el-menu-item index="/status/">Status</el-menu-item>
         <el-menu-item index="/discussion/">Discussion</el-menu-item>
-        <el-sub-menu>
+        <el-sub-menu index="Rank">
             <template #title>Rank</template>
             <el-menu-item index="/acmrank/">ACM</el-menu-item>
             <el-menu-item index="/oirank/">OI</el-menu-item>
@@ -21,37 +21,35 @@
             </el-sub-menu>
         </el-sub-menu>
         <el-menu-item index="/group/">Group</el-menu-item>
-        <el-sub-menu>
+        <el-sub-menu index="About">
             <template #title>About</template>
             <el-menu-item index="/aboutintroduction/">Introduction</el-menu-item>
             <el-menu-item index="/aboutdeveloper/">Developer</el-menu-item>
         </el-sub-menu>
-        <el-sub-menu>
-            <template #title>username</template>
-            <el-menu-item index="/404/">account</el-menu-item>
-            <el-menu-item index="/404/">exit</el-menu-item>
+        <div class="flex-grow" />
+        <el-sub-menu index="Accout">
+            <template #title>Username</template>
+            <el-menu-item index="2-1">accout</el-menu-item>
+            <el-menu-item index="2-2">exit</el-menu-item>
         </el-sub-menu>
     </el-menu>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-
-const activeIndex = ref('1')
+const activeIndex = ref('2')
 const handleSelect = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }
-// import { useRoute } from 'vue-router';
-// import { computed } from 'vue';
-// export default {
-//     setup() {
-//         const route = useRoute();
-//         let route_name = computed(() => route.name)
-//         return {
-//             route_name
-//         }
-//     }
-// }
 </script>
 
-<style></style>
+<style scoped>
+/* .login-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+} */
+
+.flex-grow {
+    flex-grow: 1;
+}
+</style>
