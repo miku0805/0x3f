@@ -1,7 +1,7 @@
 <template>
-    <!-- element -->
-    <el-menu :default-active="activeIndex" class="menu" mode="horizontal" router background-color="#39C5BB"
-        unique-opened="false" menu-trigger="clink" popper-effect="dark" @select="handleSelect">
+    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false" @select="handleSelect"
+        background-color="#39C5BB" router menu-trigger="clink">
+        <el-menu-item index="0">LOGO</el-menu-item>
         <el-menu-item index="/home/">OJ</el-menu-item>
         <el-menu-item index="/home/">Home</el-menu-item>
         <el-menu-item index="/problem/">Problem</el-menu-item>
@@ -9,47 +9,62 @@
         <el-menu-item index="/contest/">Contest</el-menu-item>
         <el-menu-item index="/status/">Status</el-menu-item>
         <el-menu-item index="/discussion/">Discussion</el-menu-item>
-        <el-sub-menu index="Rank">
-            <template #title>Rank</template>
-            <el-menu-item index="/acmrank/">ACM</el-menu-item>
-            <el-menu-item index="/oirank/">OI</el-menu-item>
-            <el-sub-menu>
-                <template #title>item four</template>
-                <el-menu-item index="2-4-1">item one</el-menu-item>
-                <el-menu-item index="2-4-2">item two</el-menu-item>
-                <el-menu-item index="2-4-3">item three</el-menu-item>
-            </el-sub-menu>
-        </el-sub-menu>
-        <el-menu-item index="/group/">Group</el-menu-item>
-        <el-sub-menu index="About">
-            <template #title>About</template>
-            <el-menu-item index="/aboutintroduction/">Introduction</el-menu-item>
-            <el-menu-item index="/aboutdeveloper/">Developer</el-menu-item>
-        </el-sub-menu>
+        <el-menu-item index="/rank/">Rank</el-menu-item>
+        <el-menu-item index="/about/">About</el-menu-item>
         <div class="flex-grow" />
-        <el-sub-menu index="Accout">
-            <template #title>Username</template>
-            <el-menu-item index="2-1">accout</el-menu-item>
-            <el-menu-item index="2-2">exit</el-menu-item>
+        <el-sub-menu index="2" v-if="$store.state.user.is_login">
+            <template #title>{{ $store.state.user.username }}</template>
+            <el-button index="/login/">My Account</el-button>
+            <el-button class="exit" @click="logout">Exit</el-button>
         </el-sub-menu>
+        <el-menu-item v-else>
+            <el-menu-item index="/login/">Login</el-menu-item>
+            <el-menu-item index="/register/">Register</el-menu-item>
+        </el-menu-item>
     </el-menu>
 </template>
 
 <script lang="ts" setup>
+// import { reactive } from 'vue'
 import { ref } from 'vue'
+import { useStore } from 'vuex'
 const activeIndex = ref('2')
 const handleSelect = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }
+
+
+//login
+const store = useStore();
+const logout = () => {
+    store.dispatch("logout");
+}
+
+
 </script>
 
 <style scoped>
-/* .login-button {
-    margin-top: 10px;
-    margin-bottom: 10px;
-} */
+el-button {
+    width: 100%;
+}
 
 .flex-grow {
     flex-grow: 1;
+}
+
+.el-button--text {
+    margin-right: 15px;
+}
+
+.el-select {
+    width: 300px;
+}
+
+.el-input {
+    width: 300px;
+}
+
+.dialog-footer button:first-child {
+    margin-right: 10px;
 }
 </style>

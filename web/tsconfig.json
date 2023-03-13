@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "strict": true, // js/ts 混用时设为false
+    "strict": false, // js/ts 混用时设为false
     "jsx": "preserve",
     "moduleResolution": "node",
     "experimentalDecorators": true,
@@ -34,8 +34,12 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
-  ],
+    "tests/**/*.tsx",
+    "src/store/index.js",
+    "src/store/index.js",
+    "src/store/user.js",
+    "src/store/user.js"
+, "src/router/index.js", "src/router/index.js"  ],
   "exclude": [
     "node_modules"
   ]
