@@ -1,11 +1,11 @@
 <template>
-    <ContentField>
-        training
-    </ContentField>
+    <!-- <ContentField> -->
+    training
+    <!-- </ContentField> -->
 </template>
 
 <script setup>
-import ContentField from '@/components/ContentField.vue'
+// import ContentField from '@/components/ContentField.vue'
 
 // export default {
 //     components: {

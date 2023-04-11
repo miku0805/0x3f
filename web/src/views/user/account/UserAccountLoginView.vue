@@ -5,11 +5,12 @@
             <form @submit.prevent="login">
                 <div class="mb-3">
                     <label for="username" class="form-label">用户名</label>
-                    <input v-model="username" type="text" class="form-control" id="username" placeholder="请输入用户名">
+                    <input v-model="username" type="text" id="username" autocomplete="username" placeholder="请输入用户名">
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">密码</label>
-                    <input v-model="password" type="password" class="form-control" id="password" placeholder="请输入密码">
+                    <input v-model="password" type="password" id="password" autocomplete="current-password"
+                        placeholder="请输入密码">
                 </div>
                 <div class="error_message">{{ error_message }}</div>
                 <button type="submit" class="btn btn-info">提交</button>

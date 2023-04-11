@@ -28,6 +28,22 @@ export default {
     //   }
     // });
     // $.ajax({
+    //   url: "http://127.0.0.1:3000/compile/",
+    //   type: "post",
+    //   data: JSON.stringify({
+    //     code: "#include <iostream>\nint main() {\n    std::cout << \"李嘉又要进国赛喽\" << std::endl;\n    return 0;\n}"
+    //   }),
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   success(resp) {
+    //     console.log(resp);
+    //   },
+    //   error(resp) {
+    //     console.log(resp);
+    //   }
+    // });
+    // $.ajax({
     //   url: "http://127.0.0.1:3000/user/account/register/",
     //   type: "post",
     //   data: {

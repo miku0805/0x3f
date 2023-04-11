@@ -1,6 +1,6 @@
 <template>
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false" @select="handleSelect"
-        background-color="#39C5BB" router menu-trigger="clink">
+        background-color="#39C5BB" router>
         <el-menu-item index="0">LOGO</el-menu-item>
         <el-menu-item index="/home/">OJ</el-menu-item>
         <el-menu-item index="/home/">Home</el-menu-item>

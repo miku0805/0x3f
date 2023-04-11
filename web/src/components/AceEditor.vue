@@ -1,5 +1,5 @@
 <template>
-    <v-ace-editor class="editor" v-model:value="content" @init="editorInit" lang="html" theme="chrome" />
+    <v-ace-editor class="editor" lang="html" theme="chrome" />
 </template>
 
 <script >
@@ -23,7 +23,7 @@ export default {
 <style scoped>
 .editor {
     width: 50%;
-    height: 710px;
+    height: 500px;
     margin-left: auto;
 }
 </style>
