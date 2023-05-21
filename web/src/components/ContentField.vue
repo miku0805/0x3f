@@ -4,15 +4,6 @@
             <h3 text="2xl" justify="center">{{ item }}</h3>
         </el-carousel-item>
     </el-carousel>
-    <!-- <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
-        <li v-for="i in count" :key="i" class="infinite-list-item">{{ i }}</li>
-    </ul>
-    <div class="demo-fit">
-        <div v-for="fit in fits" :key="fit" class="block">
-            <span class="title">{{ fit }}</span>
-            <el-avatar shape="square" :size="100" :fit="fit" :src="url" />
-        </div>
-    </div> -->
     <div>
         <el-button @click="show = !show">Click Me</el-button>
 
@@ -30,35 +21,9 @@
             </transition>
         </div>
     </div>
-    <!-- 折叠面板 -->
-    <!-- <div>
-        <el-button @click="show = !show">Click Me</el-button>
-
-        <div style="margin-top: 20px; height: 200px">
-            <el-collapse-transition>
-                <div v-show="show">
-                    <div class="transition-box">el-collapse-transition</div>
-                    <div class="transition-box">el-collapse-transition</div>
-                </div>
-            </el-collapse-transition>
-        </div>
-    </div> -->
 </template>
   
 <script lang="ts" setup>
-// import { ref } from 'vue'
-// import { reactive, toRefs } from 'vue'
-// const show = ref(true)
-// const count = ref(0)
-// const load = () => {
-//     count.value += 2
-// }
-// const state = reactive({
-//     fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
-//     url: "https://avatars.githubusercontent.com/u/105724177?s=400&u=15976605823fa42ea1a5bc43847b44ae7858eaec&v=4",
-// })
-
-// const { fits, url } = toRefs(state)
 </script>
 
 <style scoped>

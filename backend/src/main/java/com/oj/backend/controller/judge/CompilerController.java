@@ -89,7 +89,7 @@ import java.util.stream.Collectors;
 //}
 @RestController
 public class CompilerController {
-    @PostMapping("/compile/")
+    @PostMapping("/api/compile/")
     public Map<String,String> compile(@RequestBody Map<String, String> map) {
         String code = map.get("code");
         String inputStr = map.get("input");

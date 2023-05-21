@@ -17,9 +17,6 @@ import cpp from 'highlight.js/lib/languages/cpp';
 // highlightjs
 import hljs from 'highlight.js';
 
-import 'xe-utils';
-import VXETable from 'vxe-table';
-import 'vxe-table/lib/style.css';
 
 hljs.registerLanguage('cpp', cpp);
 VueMarkdownEditor.use(vuepressTheme, {
@@ -33,4 +30,4 @@ VueMarkdownEditor.use(vuepressTheme, {
 VueMarkdownEditor.use(githubTheme, {
     Hljs: hljs,
 });
-createApp(App).use(store).use(router).use(ElementPlus).use(VueMarkdownEditor).use(VXETable).mount('#app')
+createApp(App).use(store).use(router).use(ElementPlus).use(VueMarkdownEditor).mount('#app')

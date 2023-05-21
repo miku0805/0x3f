@@ -1,17 +1,8 @@
 <template>
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false" @select="handleSelect"
+    <!-- <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false" @select="handleSelect"
+        background-color="#39C5BB" router> -->
+    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
         background-color="#39C5BB" router>
-        <el-menu-item index="0">LOGO</el-menu-item>
-        <el-menu-item index="/home/">OJ</el-menu-item>
-        <el-menu-item index="/home/">Home</el-menu-item>
-        <el-menu-item index="/problem/">Problem</el-menu-item>
-        <el-menu-item index="/training/">Training</el-menu-item>
-        <el-menu-item index="/contest/">Contest</el-menu-item>
-        <el-menu-item index="/status/">Status</el-menu-item>
-        <el-menu-item index="/discussion/">Discussion</el-menu-item>
-        <el-menu-item index="/rank/">Rank</el-menu-item>
-        <el-menu-item index="/about/">About</el-menu-item>
-        <div class="flex-grow" />
         <el-sub-menu index="2" v-if="$store.state.user.is_login">
             <template #title>{{ $store.state.user.username }}</template>
             <el-button index="/login/">My Account</el-button>
@@ -21,11 +12,18 @@
             <el-menu-item index="/login/">Login</el-menu-item>
             <el-menu-item index="/register/">Register</el-menu-item>
         </el-menu-item>
+        <div class="flex-grow" />
+        <el-menu-item index="/home/">编译器</el-menu-item>
+        <el-menu-item index="/problem/">Problem</el-menu-item>
+        <el-menu-item index="/training/">随机一题</el-menu-item>
+        <el-menu-item index="/contest/">Contest</el-menu-item>
+        <el-menu-item index="/status/">Status</el-menu-item>
+        <el-menu-item index="/discussion/">Discussion</el-menu-item>
+        <el-menu-item index="/about/">About</el-menu-item>
     </el-menu>
 </template>
 
 <script lang="ts" setup>
-// import { reactive } from 'vue'
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 const activeIndex = ref('2')
@@ -44,6 +42,13 @@ const logout = () => {
 </script>
 
 <style scoped>
+.el-menu-demo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
 el-button {
     width: 100%;
 }

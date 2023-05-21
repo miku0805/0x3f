@@ -31,7 +31,7 @@ export default {
         compile() {
             // let code = ref('')
             $.ajax({
-                url: "http://127.0.0.1:3000/compile/",
+                url: "http://101.33.207.160:3000/api/compile/",
                 type: "post",
                 data: JSON.stringify({
                     code: "#include <iostream>\nint main() {\n    std::cout << \"李嘉又要进国赛喽\" << std::endl;\n    return 0;\n}"

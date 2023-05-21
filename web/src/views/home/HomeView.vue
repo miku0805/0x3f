@@ -1,13 +1,13 @@
 <template>
     <v-ace-editor v-model:value="content" :min-lines="20" :max-lines="300" lang="c_cpp" style="" :options="{
-        enableBasicAutocompletion: true, //启用基本自动完成
-        enableSnippets: true, // 启用代码段
-        enableLiveAutocompletion: true, // 启用实时自动完成
-        fontSize: 22, //设置字号
-        tabSize: 4, // tab大小
-        showPrintMargin: false, //去除编辑器里的竖线
-        highlightActiveLine: true,
-    }" />
+            enableBasicAutocompletion: true, //启用基本自动完成
+            enableSnippets: true, // 启用代码段
+            enableLiveAutocompletion: true, // 启用实时自动完成
+            fontSize: 22, //设置字号
+            tabSize: 4, // tab大小
+            showPrintMargin: false, //去除编辑器里的竖线
+            highlightActiveLine: true,
+        }" />
     <!-- <div class="btn-div" style="float:right"> -->
     <!-- <button @click="runCode" type="button" class="btn btn-success submit-btn">
             Submit</button> -->
@@ -73,7 +73,7 @@ export default {
             console.log(content.value);
             console.log(input.value);
             $.ajax({
-                url: "http://127.0.0.1:3000/compile/",
+                url: "http://101.33.207.160:3000/api/compile/",
                 type: "POST",
                 data: JSON.stringify({
                     code: content.value,
