@@ -60,7 +60,7 @@ export default {
         const pull_page = page => {
             current_page = page;
             $.ajax({
-                url: "http://127.0.0.1:3000/api/record/getlist/",
+                url: "http://101.33.207.160:3000/api/record/getlist/",
                 data: {
                     page,
                 },
@@ -92,7 +92,7 @@ export default {
         const add_records = () => {
             recordadd.error_message = "";
             $.ajax({
-                url: "http://127.0.0.1:3000/api/record/add/",
+                url: "http://101.33.207.160:3000/api/record/add/",
                 type: "POST",
                 data: {
                     content: recordadd.content,
@@ -114,7 +114,7 @@ export default {
         const finish_records = (record) => {
             console.log(233);
             $.ajax({
-                url: "http://127.0.0.1:3000/api/record/finish/",
+                url: "http://101.33.207.160:3000/api/record/finish/",
                 type: "post",
                 data: {
                     record_id: record.record.id,

@@ -14,5 +14,5 @@ public class AddController {
     private AddService addService;
 
     @PostMapping("/api/record/add/")
-    public Map<String,String>add(@RequestParam Map<String,String>data) {return  addService.add(data);};
+    public Map<String,String> add(@RequestParam Map<String,String>data) {return  addService.add(data);};
 }

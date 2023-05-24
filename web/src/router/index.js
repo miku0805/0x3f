@@ -5,6 +5,7 @@ import ProblemView from '@/views/problem/ProblemView.vue'
 import StatusView from '@/views/status/StatusView.vue'
 import TrainingView from '@/views/training/TrainingView.vue'
 import ContestView from '@/views/contest/ContestView.vue'
+import BlogDetailView from "@/views/contest/BlogDetailView.vue"
 import DiscussionView from '@/views/discussion/DiscussionView.vue'
 import AboutIntroductionView from '@/views/about/AboutIntroductionView.vue'
 import AboutDeveloperView from '@/views/about/AboutDeveloperView.vue'
@@ -37,7 +38,7 @@ const routes = [
     }
   },
   {
-    path: "/status/",
+    path: '/status/',
     name: "status_index",
     component: StatusView,
     meta: {
@@ -45,7 +46,7 @@ const routes = [
     }
   },
   {
-    path: "/training/",
+    path: '/training/',
     name: "training_index",
     component: TrainingView,
     meta: {
@@ -53,9 +54,17 @@ const routes = [
     }
   },
   {
-    path: "/contest/",
+    path: '/contest/',
     name: "contest_index",
     component: ContestView,
+    meta: {
+      requestAuth: true,
+    }
+  },
+  {
+    path: '/blog/:id',
+    name: "blogdetail",
+    component: BlogDetailView,
     meta: {
       requestAuth: true,
     }

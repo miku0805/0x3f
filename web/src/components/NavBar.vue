@@ -16,8 +16,8 @@
         <el-menu-item index="/home/">编译器</el-menu-item>
         <el-menu-item index="/problem/">Problem</el-menu-item>
         <el-menu-item index="/training/">随机一题</el-menu-item>
-        <el-menu-item index="/contest/">Contest</el-menu-item>
-        <el-menu-item index="/status/">Status</el-menu-item>
+        <el-menu-item index="/contest/">博客</el-menu-item>
+        <el-menu-item index="/status/">待办</el-menu-item>
         <el-menu-item index="/discussion/">Discussion</el-menu-item>
         <el-menu-item index="/about/">About</el-menu-item>
     </el-menu>
