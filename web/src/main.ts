@@ -11,13 +11,14 @@ import '@kangc/v-md-editor/lib/style/base-editor.css';
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
 import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
 import Prism from 'prismjs';
-import githubTheme from '@kangc/v-md-editor/lib/theme/github.js';
-import '@kangc/v-md-editor/lib/theme/style/github.css';
 import cpp from 'highlight.js/lib/languages/cpp';
 // highlightjs
 import hljs from 'highlight.js';
-
-
+import createHighlightLinesPlugin from '@kangc/v-md-editor/lib/plugins/highlight-lines/index';
+import '@kangc/v-md-editor/lib/plugins/highlight-lines/highlight-lines.css';
+import createLineNumbertPlugin from '@kangc/v-md-editor/lib/plugins/line-number/index';
+import createCopyCodePlugin from '@kangc/v-md-editor/lib/plugins/copy-code/index';
+import '@kangc/v-md-editor/lib/plugins/copy-code/copy-code.css';
 hljs.registerLanguage('cpp', cpp);
 VueMarkdownEditor.use(vuepressTheme, {
     Prism,
@@ -26,8 +27,5 @@ VueMarkdownEditor.use(vuepressTheme, {
         // md为 markdown-it 实例，可以在此处进行修改配置,并使用 plugin 进行语法扩展
         // md.set(option).use(plugin);
     },
-});
-VueMarkdownEditor.use(githubTheme, {
-    Hljs: hljs,
-});
+}).use(createHighlightLinesPlugin()).use(createLineNumbertPlugin()).use(createCopyCodePlugin());
 createApp(App).use(store).use(router).use(ElementPlus).use(VueMarkdownEditor).mount('#app')

@@ -29,8 +29,10 @@ public class GetBlogListServiceImpl implements GetBlogListService {
         for (Blog blog: blogs) {
             JSONObject item = new JSONObject();
             item.put("id",blog.getId());
-            item.put("brief",blog.getBrief());
+            item.put("title",blog.getTitle());
             item.put("content",blog.getContent());
+            item.put("brief",blog.getBrief());
+            item.put("image",blog.getImage());
             item.put("blog",blog);
             items.add(item);
         }

@@ -21,6 +21,8 @@ public class BlogServiceImpl implements BlogService {
         item.put("createtime",blog.getCreatetime());
         item.put("content",blog.getContent());
         item.put("brief",blog.getBrief());
+        item.put("title",blog.getTitle());
+        item.put("image",blog.getImage());
 //        item.put("blog",blog);
         resp.put("blog",item);
         return resp;

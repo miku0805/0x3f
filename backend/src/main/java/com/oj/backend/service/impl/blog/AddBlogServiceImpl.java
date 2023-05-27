@@ -20,8 +20,10 @@ public class AddBlogServiceImpl implements AddBlogService {
         Map<String,String>map = new HashMap<>();
         Date now = new Date();
         String content = data.get("content");
+        String title = data.get("title");
         String brief = data.get("brief");
-        Blog blog = new Blog(null,content,brief,now);
+        String image = data.get("image");
+        Blog blog = new Blog(null,content,title,brief,image,now);
         blogMapper.insert(blog);
         map.put("error_message","success");
         return map;

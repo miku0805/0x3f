@@ -17,7 +17,9 @@ public class Blog {
     private Integer id;
 
     private String content;
+    private String title;
     private String brief;
+    private String image = "https://cdn.acwing.com/media/user/profile/photo/202849_lg_56d5f550f1.jpg";
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     private Date createtime;
 }
