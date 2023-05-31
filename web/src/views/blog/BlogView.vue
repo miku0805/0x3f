@@ -1,8 +1,9 @@
 <template>
     <div class="row">
-        <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#add-blog-btn">
+        <el-button type="button" class="float-end el-button--transparent" data-bs-toggle="modal"
+            data-bs-target="#add-blog-btn">
             创建blog
-        </button>
+        </el-button>
 
         <div class="modal fade" id="add-blog-btn" tabindex="-1">
             <div class="modal-dialog modal-xl">
@@ -43,17 +44,19 @@
         </div>
     </div>
 
-    <div class="blog-container">
-        <div v-for="blog in  blogs " :key="blog.id" class="blog-item" @click="handleClick(blog)">
-            <div class="blog-image" v-if="blog.image">
-                <img v-bind:src="blog.image.trim()" alt="BlogImage">
+    <el-container class="blog-container" style="display: inline-block;">
+        <el-card v-for="blog in blogs" :key="blog.id" class="blog-item" @click="handleClick(blog)">
+            <div class="blog-content">
+                <div class="blog-image" v-if="blog.image">
+                    <img v-bind:src="blog.image.trim()" alt="BlogImage">
+                </div>
+                <div class="blog-info">
+                    <h3>{{ blog.title }}</h3>
+                    <p>{{ blog.brief }}</p>
+                </div>
             </div>
-            <div class="blog-info">
-                <h3>{{ blog.title }}</h3>
-                <p>{{ blog.brief }}</p>
-            </div>
-        </div>
-    </div>
+        </el-card>
+    </el-container>
     <nav aria-label="...">
         <ul class="pagination" style="float: right;">
             <li class="page-item" @click="click_page(-2)">
@@ -173,26 +176,6 @@ export default {
     overflow-x: hidden;
 }
 
-.blog-item {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    padding: 20px 24px;
-    background: rgba(255, 255, 255, 0.84);
-
-    /* 使用特性检测来判断是否支持backdrop-filter属性 */
-    @supports (-webkit-backdrop-filter: blur(100px) or backdrop-filter: blur(10px)) {
-        .element {
-            -webkit-backdrop-filter: blur(10px);
-            /* 设置模糊程度，可以根据需要进行调整 */
-            backdrop-filter: blur(100px);
-            /* 设置模糊程度，可以根据需要进行调整 */
-        }
-    }
-}
-
 
 
 .blog-image {
@@ -218,5 +201,31 @@ export default {
 
 .blog-info h3 {
     margin-top: 1;
+}
+
+
+.blog-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.blog-item {
+    background-color: transparent;
+}
+
+.blog-item:hover {
+    background-image: linear-gradient(to top right, #f5f5f5, #ffe6e6);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.blog-image {
+    margin-right: 10px;
+}
+
+.el-button--transparent {
+    background-color: transparent;
+    border-color: transparent;
+    color: #000;
 }
 </style>

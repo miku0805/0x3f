@@ -1,135 +1,289 @@
 <template>
-    <v-ace-editor v-model:value="content" :min-lines="20" :max-lines="300" lang="c_cpp" style="" :options="{
-            enableBasicAutocompletion: true, //启用基本自动完成
-            enableSnippets: true, // 启用代码段
-            enableLiveAutocompletion: true, // 启用实时自动完成
-            fontSize: 22, //设置字号
-            tabSize: 4, // tab大小
-            showPrintMargin: false, //去除编辑器里的竖线
-            highlightActiveLine: true,
-        }" />
-    <!-- <div class="btn-div" style="float:right"> -->
-    <!-- <button @click="runCode" type="button" class="btn btn-success submit-btn">
-            Submit</button> -->
-    <el-button @click="runCode" type="button" style="float:right">submit</el-button>
-    <!-- </div> -->
-    <div class="operator-box mb-3"
-        style=" 
-                                                                                                                                        border-radius: 4px; 
-                                                                                                                                        height: 200px; clear: both;">
+    <el-button type="button" class="float-end el-button--transparent" data-bs-toggle="modal" data-bs-target="#add-blog-btn">
+        创建blog
+    </el-button>
 
-        <div class="item" style="margin-left: 20px ; margin-right: 20px;">
-            <label for="input" class="form-label" style="font-size: 15px; ">输入</label>
-            <textarea ref="textarea" v-model="input" class="form-control" id="exampleFormControlTextarea1"
-                rows="3"></textarea>
-        </div>
+    <div class="modal fade" id="add-blog-btn" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">创建blog</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="add-blog-title" class="form-label">title</label>
+                        <input v-model="blogadd.title" type="text" class="form-control" id="add-blog-title"
+                            placeholder="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="add-blog-brief" class="form-label">brief</label>
+                        <textarea v-model="blogadd.brief" class="form-control" id="add-blog-brief" rows="3"
+                            placeholder="brief"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="add-blog-image" class="form-label">image</label>
+                        <textarea v-model="blogadd.image" class="form-control" id="add-blog-image" rows="3"
+                            placeholder="image"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="add-blog-code" class="form-label">content</label>
+                        <v-md-editor v-model="blogadd.content" width="400px" height="500px"></v-md-editor>
+                    </div>
 
-        <div class="item" style="margin-left: 20px ; margin-right: 20px; border-radius: 4px;">
-            <label for="input" class="form-label" style="font-size: 15px; ">输出</label>
-            <div class="background-vm"
-                style="background-color: white; border-radius: 4px; 
-                                                                                                                                                color: black; height: auto; background-color: rgb(242,243,245);">
-                <pre style="margin-left: 20px;">{{ output }}</pre>
-                <!-- 用pre就可以换行渲染json -->
+                </div>
+                <div class="modal-footer">
+                    <div class="error-message">{{ blogadd.error_message }}</div>
+                    <button type="button" class="btn btn-primary" @click="add_blog">创建</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                </div>
             </div>
         </div>
     </div>
+    <el-row>
+        <el-col :span="21">
+            <el-container class="blog-container" style="display: inline-block;">
+                <el-card v-for="blog in blogs" :key="blog.id" class="blog-item blog-card" @click="handleClick(blog)">
+                    <div class="blog-content">
+                        <div class="blog-image" v-if="blog.image">
+                            <img v-bind:src="blog.image.trim()" alt="BlogImage">
+                        </div>
+                        <div class="blog-info">
+                            <h3>{{ blog.title }}</h3>
+                            <p>{{ blog.brief }}</p>
+                        </div>
+                    </div>
+                </el-card>
+            </el-container>
+        </el-col>
+        <el-col :span="3">
+            <el-card class="profile">
+                <div class="profile-image">
+                    <img src="@/assets/2.jpg" alt="Profile-image">
+                </div>
+                <pre>Mikami</pre>
+                <pre>QQ: 3500085264</pre>
+                <pre>Wechat: Chtholly_Tree</pre>
+                <el-link
+                    :href="`https://space.bilibili.com/185472813/fans/follow?spm_id_from=333.1007.0.0`">BiliBili</el-link>
+                <el-link :href="`https://github.com/miku0805`">Github</el-link>
+                <pre>碧蓝航线日服:614268029</pre>
+            </el-card>
+        </el-col>
+    </el-row>
+    <nav aria-label="...">
+        <ul class="pagination" style="float: right;">
+            <li class="page-item" @click="click_page(-2)">
+                <a class="page-link" href="#">前一页</a>
+            </li>
+            <li :class="'page-item ' + page.is_active" v-for="     page      in      pages     " :key="page.number"
+                @click="click_page(page.number)">
+                <a class="page-link" href="#">{{ page.number }}</a>
+            </li>
+            <li class="page-item" @click="click_page(-1)">
+                <a class="page-link" href="#">后一页</a>
+            </li>
+        </ul>
+    </nav>
 </template>
 
 <script>
-import { VAceEditor } from 'vue3-ace-editor'
-import ace from "ace-builds";
-import 'ace-builds/src-noconflict/mode-json';
-import 'ace-builds/src-noconflict/theme-chrome';
-import 'ace-builds/src-noconflict/theme-monokai';
-import 'ace-builds/src-noconflict/ext-language_tools';
-import 'ace-builds/src-noconflict/mode-python';
-import 'ace-builds/src-noconflict/mode-c_cpp';
-import { ref } from 'vue';
-import $ from 'jquery'
-// import autosize from 'autosize'
-
-
-ace.config.set(
-    "basePath",
-    "https://cdn.jsdelivr.net/npm/ace-builds@" +
-    require("ace-builds").version +
-    "/src-noconflict/")
-
+import { useStore } from 'vuex';
+import $ from "jquery";
+import { reactive, ref } from 'vue';
+import { useRouter } from 'vue-router'
+import { Modal } from 'bootstrap/dist/js/bootstrap'
 export default {
-    components: {
-        // ContentField,
-        VAceEditor,
-    },
-    // mounted() {
-    //     autosize(this.$refs.textarea)
-    // },
+    components: {},
     setup() {
-        let content = ref('');
-        let backid = ref('');
-        let output = ref('');
-        let input = ref('');
-        function runCode() {
-            console.log(content.value);
-            console.log(input.value);
+        const router = useRouter()
+        const store = useStore();
+        let blogs = ref([]);
+        let current_page = 1;
+        let total_blogs = 0;
+
+        const blogadd = reactive({
+            content: "",
+            error_message: "",
+            title: "",
+            brief: "",
+            image: "",
+        });
+
+        const pull_page = page => {
+            current_page = page;
             $.ajax({
-                url: "http://101.33.207.160:3000/api/compile/",
-                type: "POST",
-                data: JSON.stringify({
-                    code: content.value,
-                    input: input.value,
-                }),
+                url: "http://101.33.207.160:3000/api/blog/getlist/",
+                data: {
+                    page,
+                },
+                type: "get",
                 headers: {
-                    "Content-Type": "application/json"
+                    Authorization: "Bearer " + store.state.user.token,
                 },
                 success(resp) {
-                    backid = resp;
-                    console.log(resp);
-                    output.value = resp.output;
-                    console.log(output.value);
-                    if (output.value === undefined)  // 返回报错信息
-                        output.value = resp.error
+                    blogs.value = resp.blogs;
+                    total_blogs = resp.blogs_count;
                 },
+                error(resp) {
+                    console.log(resp);
+                }
             })
         }
-        return {
-            content,
-            runCode,
-            backid,
-            output,
-            input,
+        pull_page(current_page);
+
+        const click_page = page => {
+            if (page === -2) page = current_page - 1;
+            else if (page === -1) page = current_page + 1;
+            let max_pages = parseInt(Math.ceil(total_blogs / 10));
+
+            if (page >= 1 && page <= max_pages) {
+                pull_page(page);
+            }
         }
-    },
+
+        const add_blog = () => {
+            blogadd.error_message = "";
+            $.ajax({
+                url: "http://101.33.207.160:3000/api/blog/add/",
+                type: "POST",
+                data: {
+                    content: blogadd.content,
+                    title: blogadd.title,
+                    brief: blogadd.brief,
+                    image: blogadd.image,
+                },
+                headers: {
+                    Authorization: "Bearer " + store.state.user.token,
+                },
+                success(resp) {
+                    if (resp.error_message === "success") {
+                        blogadd.content = "",
+                            blogadd.brief = "",
+                            blogadd.content = "",
+                            Modal.getInstance("#add-blog-btn").hide(),
+                            pull_page(current_page);
+                    }
+                    else blogadd.error_message = resp.error_message;
+                }
+            })
+        }
+
+        const handleClick = row => {
+            router.push({ name: 'blogdetail', params: { id: row.blog.id } })
+        }
+        return {
+            blogs,
+            blogadd,
+            add_blog,
+            click_page,
+            handleClick,
+        }
+    }
 }
 </script>
 
 <style scoped>
-.output-box {
-    background-color: white;
-    clear: both;
-    height: 30px;
-    border-radius: 5px;
+.blog-container {
+    width: auto;
+    height: auto;
 }
 
-.submit-btn {
-    margin-top: 20px;
-    width: 200px;
-    margin-bottom: 20px;
-}
-
-.editor-bar-content {
-    height: 60px;
-    background-color: white;
-}
-
-.form-select {
-    width: 140px;
-    margin-left: auto;
+.blog-image {
+    flex: 0 0 200px;
     margin-right: 20px;
-    margin-top: auto;
 }
 
-.col {
-    border: solid;
+.profile {
+    display: flex;
+    /* 将容器设置为 flex 容器 */
+    justify-content: center;
+    /* 水平居中 */
+    align-items: center;
+    /* 垂直居中 */
+    margin: 30px;
+    /* 调整容器的外边距 */
+    padding: 10px 10px;
+    /* 调整容器的内边距 */
+    align-items: flex-start;
+    background-image: linear-gradient(to top right, #f5f5f5, #ffe6e6);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    /* 将容器宽度设置为 100% */
+    height: 500px;
+    /* 将容器高度设置为 500px */
+    text-align: center;
+}
+
+.profile-image img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+}
+
+.profile-image:hover img {
+    transform: rotate(360deg);
+    /* 在鼠标悬停时将图片旋转360度 */
+}
+
+.el-link {
+    display: block;
+    margin-bottom: 10px;
+}
+
+body {
+    color: pink;
+}
+
+.blog-image img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease-out;
+    /* 添加过渡效果 */
+}
+
+.blog-item:hover .blog-image img {
+    transform: scale(1.1);
+    /* 添加鼠标悬停时的动画效果 */
+}
+
+.blog-info {
+    flex: 1;
+}
+
+.blog-info h3 {
+    margin-top: 1;
+}
+
+
+.blog-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.blog-item {
+    background-color: transparent;
+}
+
+.blog-card {
+    margin-bottom: 10px;
+}
+
+.blog-item:hover {
+    background-image: linear-gradient(to top right, #f5f5f5, #ffe6e6);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.blog-image {
+    margin-right: 10px;
+}
+
+.el-button--transparent {
+    background-color: transparent;
+    border-color: transparent;
+    color: #000;
 }
 </style>

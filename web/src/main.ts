@@ -18,7 +18,6 @@ import createHighlightLinesPlugin from '@kangc/v-md-editor/lib/plugins/highlight
 import '@kangc/v-md-editor/lib/plugins/highlight-lines/highlight-lines.css';
 import createLineNumbertPlugin from '@kangc/v-md-editor/lib/plugins/line-number/index';
 import createCopyCodePlugin from '@kangc/v-md-editor/lib/plugins/copy-code/index';
-import '@kangc/v-md-editor/lib/plugins/copy-code/copy-code.css';
 hljs.registerLanguage('cpp', cpp);
 VueMarkdownEditor.use(vuepressTheme, {
     Prism,

@@ -1,24 +1,18 @@
 <template>
-    <table class="table table-striped table-hover" style="text-align: center;">
-        <thead>
-            <tr>
-                <th> 任务 </th>
-                <th>创建时间</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="record in records" :key="record.record.id">
-                <td>{{ record.record.content }}</td>
-                <td>{{ record.record.createtime }}</td>
-                <td>
-                    <!-- <button type="button" class="btn btn-secondary" @clink="finish_records(record)">Accept</button> -->
-                    <el-button @click="finish_records(record)" type="button" class="btn btn-secondary">Accept</el-button>
-                    <el-button @click="add_records" type="button" class="btn btn-secondary">Submit</el-button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <el-table :data="records" style="text-align: center; background-color: transparent;">
+        <el-table-column label="任务" prop="content"></el-table-column>
+        <el-table-column label="创建时间" prop="createtime"></el-table-column>
+        <el-table-column label="操作">
+            <template #default="{ row }">
+                <el-button @click="finish_records(row)" type="button" class="btn btn-secondary">
+                    Accept
+                </el-button>
+                <el-button @click="add_records" type="button" class="btn btn-secondary">
+                    Submit
+                </el-button>
+            </template>
+        </el-table-column>
+    </el-table>
     <nav aria-label="...">
         <ul class="pagination" style="float: right;">
             <li class="page-item" @click="click_page(-2)">
